@@ -2,23 +2,17 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {VotingProposal} from "../src/VotingProposal.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+contract VotingProposalTest is Test {
+    VotingProposal public votingProposal;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        votingProposal = new VotingProposal();
     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function test_Create() public {
+        votingProposal.createProposal("Proposal 1", "Description 1");
+        assertEq(votingProposal.count(), 1);
     }
 }
